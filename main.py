@@ -27,3 +27,17 @@ class TicTacToe:
                     print('Invalid move. Try again.')
                 else:
                     return int(move) - 1
+    def play(self):
+        while True:
+            self.print_board()
+            move = self.get_move()
+            self.board[move] = self.current_player
+            result = self.check_win()
+            if result:
+                self.print_board()
+                if result == 'Draw':
+                    print('The game is a draw.')
+                else:
+                    print(f'Player {self.current_player} wins!')
+                break
+            self.current_player = 'O' if self.current_player == 'X' else 'X'
