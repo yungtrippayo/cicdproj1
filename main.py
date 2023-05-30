@@ -19,3 +19,11 @@ class TicTacToe:
         if ' ' not in self.board:
             return 'Draw'
         return False
+
+ def get_move(self):
+            while True:
+                move = input(f'Player {self.current_player}, enter your move (1-9): ')
+                if not move.isdigit() or int(move) < 1 or int(move) > 9 or self.board[int(move) - 1] != ' ':
+                    print('Invalid move. Try again.')
+                else:
+                    return int(move) - 1
