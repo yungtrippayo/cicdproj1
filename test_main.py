@@ -9,11 +9,6 @@ def test_init():
     game = TicTacToe()
     assert game.board == [' '] * 9
     assert game.current_player == 'X'
-def test_print_board(capsys):
-    game = TicTacToe()
-    game.print_board()
-    captured = capsys.readouterr()
-    assert captured.out == '  |   |  \n---------\n  |   |  \n---------\n  |   |  \n'
 
 
 def test_print_board(capsys):
@@ -55,3 +50,11 @@ def test_check_win(board, result):
     assert game.check_win() == result
 
 
+@patch('builtins.input', return_value='5')
+def test_get_move(input):
+    game = TicTacToe()
+    assert game.get_move() == 4
+
+
+if __name__ == '__main__':
+    pytest.main(['--html=report.html'])
