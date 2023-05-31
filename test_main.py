@@ -11,3 +11,42 @@ def test_init():
     assert game.current_player == 'X'
 
 
+def test_print_board(capsys):
+    game = TicTacToe()
+    game.print_board()
+    captured = capsys.readouterr()
+    assert captured.out == '  |   |  \n---------\n  |   |  \n---------\n  |   |  \n'
+
+
+@pytest.mark.parametrize("board, result", [
+    (['X', 'X', 'X',
+      ' ', ' ', ' ',
+      ' ', ' ', ' '], 'X'),
+    (['O', 'O', 'O',
+      ' ', ' ', ' ',
+      ' ', ' ', ' '], 'O'),
+    (['X', ' ', ' ',
+      'X', ' ', ' ',
+      'X', ' ', ' '], 'X'),
+    (['O', ' ', ' ',
+      'O', ' ', ' ',
+      'O', ' ', ' '], 'O'),
+    (['X', ' ', ' ',
+      ' ', 'X', ' ',
+      ' ', ' ', 'X'], 'X'),
+    ([' ', ' ', 'O',
+      ' ', 'O', ' ',
+      'O', ' ', ' '], 'O'),
+    ([' ', ' ', ' ',
+      ' ', ' ', ' ',
+      ' ', ' ', ' '], False),
+    (['X', 'O', 'X',
+      'X', 'O', 'X',
+      'O', 'X', 'O'], 'Draw'),
+])
+def test_check_win(board, result):
+    game = TicTacToe()
+    game.board = board
+    assert game.check_win() == result
+
+
