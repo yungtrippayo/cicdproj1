@@ -1,0 +1,42 @@
+name: Python CICD
+
+on:
+  push:
+    branches:
+      
+1
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+name: Checkout repository
+    uses: actions/checkout@v2
+
+    
+name: Set up Python
+    uses: actions/setup-python@v2
+    with:
+      python-version: 3.x
+
+    
+name: Install dependencies
+    run: pip install -r requirements.txt
+
+    
+name: Run linting
+    run: flake8
+
+    
+name: Run tests
+    run: pytest
+
+    
+name: Upload test coverage
+    uses: actions/upload-artifact@v2
+    with:
+      name: test-coverage
+      path: coverage.xml
